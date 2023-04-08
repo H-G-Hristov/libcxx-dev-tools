@@ -22,11 +22,6 @@ main()
 (
   check_settings
 
-  # Print commands while executing
-  # set -x
-
-  # { ch "${execution_dir}/"; } || exit 1
-
   find . -name ".DS_Store" -type f -delete
 )
 

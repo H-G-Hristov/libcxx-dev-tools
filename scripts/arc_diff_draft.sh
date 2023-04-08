@@ -38,11 +38,6 @@ main()
 (
   check_settings
 
-  # Print commands while executing
-  # set -x
-
-  # { cd "${execution_dir}/"; } || exit 1
-
   arc diff "${main_source_branch}" --draft
 )
 

@@ -22,11 +22,6 @@ main()
 (
   check_settings
 
-  # Print commands while executing
-  # set -x
-
-  # { ch "${execution_dir}/"; } || exit 1
-
   # Find code with trailing whitespace
   grep -rn '[[:blank:]]$' libcxx/include libcxx/src libcxx/test libcxx/benchmarks
 )

@@ -7,7 +7,7 @@ build_path=""
 all_tests="
 check-cxx
 check-cxxabi
-check-unwind 
+check-unwind
 "
 
 ################################################################################
@@ -69,20 +69,6 @@ main()
 (
   check_settings
   check_output_dir
-
-  # Print commands while executing
-  # set -x
-
-  # { cd "${execution_dir}/"; } || exit 1
-
-  # Run all tests
-  # ninja -C "${build_path}" check-cxx check-cxxabi check-unwind
-
-  # Run all tests with verbose output
-  # ninja -vC "${build_path}" check-cxx check-cxxabi check-unwind
-
-  # Run all tests and log to a file
-  # ninja -C "${build_path}" check-cxx check-cxxabi check-unwind > "${output_file}"
 
   # Run all tests (dump stderr and stdout streams and write them to a file and to the console)
   ninja -C "${build_path}" "${all_tests}" 2>&1 | tee "${output_file}"

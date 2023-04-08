@@ -115,24 +115,9 @@ run_test() # test, cxx_standard, output_filename
   # Print commands while executing
   set -x
 
-  # Run a test suite
-  # "${test_tool_path}/llvm-lit" -sv "${test_suite}"
-
-  # Run a test suite and log to a file
-  # "${test_tool_path}/llvm-lit" -sv "${test_suite}" > "${output_file}"
-
-  # # Print commands while executing.
-  # set -x # Print commands while executing.
-  # # Run a test suite (dump stderr and stdout streams and write them to a file and to the console)
-  # "${test_tool_path}/llvm-lit" --param "std=${cxx_standard}" -sv "${test}" 2>&1 | tee "${output_file}.${cxx_standard}.log"
-  # { set +x; } 2>/dev/null
-
   # Run a test suite (dump stderr and stdout streams and write them to a file and to the console)
   "${test_tool_path}/llvm-lit" --param "${cxx_standard_param}" -sv "${test}" 2>&1 \
   | tee "${output_filename}${cxx_standard_file_suffix}.log"
-
-  # Run a test suite (dump stderr and stdout streams and write them to a file)
-  # "${test_tool_path}/llvm-lit" --param "${cxx_standard_param}" -sv "${test}" > "${output_filename}${cxx_standard_file_suffix}.log" 2>&1
 
   { set +x; } 2>/dev/null
 }
@@ -143,11 +128,6 @@ main()
 (
   check_settings
   check_output_dir
-
-  # Print commands while executing
-  # set -x
-
-  # { cd "${execution_dir}"; } || exit 1
 
   # Run off variable value expansion except for splitting at newlines
   set -f; IFS='

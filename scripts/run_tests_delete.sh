@@ -32,11 +32,6 @@ main()
 (
   check_settings
 
-  # Print commands while executing
-  # set -x
-
-  # { ch "${execution_dir}/"; } || exit 1
-
   find "${target_directory}" -maxdepth 1 -type f -name "${file_pattern}" -delete
 )
 

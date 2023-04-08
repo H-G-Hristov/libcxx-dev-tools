@@ -96,17 +96,6 @@ main()
   check_settings
   check_output_dir
 
-  # Print commands while executing
-  # set -x
-
-  # { cd "${execution_dir}/"; } || exit 1
-
-  # Run a test suite
-  # "${test_tool_path}/llvm-lit" -sv "${test_suite}"
-
-  # Run a test suite and log to a file
-  # "${test_tool_path}/llvm-lit" -sv "${test_suite}" > "${output_file}"
-
   # Run a test suite (dump stderr and stdout streams and write them to a file and to the console)
   "${test_tool_path}/llvm-lit" -sv "${test_suite}" 2>&1 \
   | tee "${output_file}"

@@ -1,7 +1,5 @@
 #!/bin/sh
 
-#!/bin/sh
-
 ################################################################################
 
 build_path="."
@@ -31,14 +29,6 @@ check_settings()
 
 main()
 (
-  # Print commands while executing
-  # set -x
-
-  # { cd "${execution_dir}"; } || exit 1
-
-  # Run with verbose output
-  # ninja -vC "${build_path}" libcxx-generate-files
-
   # Run
   ninja -C "${build_path}" libcxx-generate-files
 )

@@ -22,11 +22,6 @@ main()
 (
   check_settings
 
-  # Print commands while executing
-  # set -x
-
-  # { ch "${execution_dir}/"; } || exit 1
-
   unset LC_COLLATE
 
   # Reject patches that introduce non-ASCII characters or hard tabs.

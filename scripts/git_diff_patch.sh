@@ -42,7 +42,7 @@ execution_dir=".."
 # I = F^   = B^3^    = A^^3^
 # J = F^2  = B^3^2   = A^^3^2
 #
-# Both commit nodes B and C are parents of commit node A. Parent commits are 
+# Both commit nodes B and C are parents of commit node A. Parent commits are
 # ordered left-to-right.
 #
 ################################################################################
@@ -111,7 +111,7 @@ rotate_diffs() # filename
       rm -rf "${file}"
     else
       name=$(basename "${file}" ".${old_index}.patch")
-      # name=$(basename "${name}" ".${name##*.}")
+
       # Otherwise move the file to the new number.
       mv "${file}" "${name}.${new_index}.patch"
     fi
@@ -130,14 +130,7 @@ main()
   check_settings
   check_output_dir
 
-  # Print commands while executing
-  # set -x
-
-  # { cd "${execution_dir}"; } || exit 1
-
   rotate_diffs "${output_file}"
-
-  # git diff "${main_branch}" > "${output_file}"
 
   # Get a diff between the main branch and the current branch
   git diff "${main_branch}"...HEAD > "${output_file}"
