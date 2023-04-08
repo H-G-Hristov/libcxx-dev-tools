@@ -76,34 +76,10 @@
   // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
-    // {
-    //   "name": "(lldb) Launch",
-    //   "type": "cppdbg",
-    //   "request": "launch",
-    //   // "program": "${workspaceFolder}/../build/default.debug.libcxx/LLVM-Testing",
-    //   // Resolved by CMake Tools:
-    //   "program": "${command:cmake.launchTargetPath}",
-    //   "args": [],
-    //   "stopAtEntry": false,
-    //   "cwd": "${fileDirname}",
-    //   "environment": [],
-    //   "externalConsole": false,
-    //   "MIMode": "lldb"
-    // },
-    // {
-    //   "name": "(lldb) Attach",
-    //   "type": "cppdbg",
-    //   "request": "attach",
-    //   // "program": "${workspaceFolder}/../build/default.debug.libcxx/LLVM-Testing",
-    //   // Resolved by CMake Tools:
-    //   "program": "${command:cmake.launchTargetPath}",
-    //   "MIMode": "lldb"
-    // },
     {
       "type": "lldb",
       "request": "launch",
       "name": "Launch",
-      // "program": "${workspaceFolder}/../build/default.debug.libcxx/LLVM-Testing",
       // Resolved by CMake Tools:
       "program": "${command:cmake.launchTargetPath}",
       "args": [],
@@ -133,28 +109,13 @@
 # *.[oa]
 # *~
 
+# Directories
+**/z_libcxx_*/
+**/zsh*/
+
+# Misc files
 .editorconfig
 
-# Directories
-**/zdocs/
-**/znotes/
-**/zsh/
-**/zsh_out/
-
-# Misc
-*.patch
-x___notes_on_libcxx_development.txt
-z_*
-
-# Script
-xarc_diff_draft.sh
-xarc_diff_new.sh
-xarc_diff_update.sh
-xgit_diff_patch.sh
-xrun_generator_scripts.sh
-xrun_tests_all.sh
-xrun_tests_multiple.sh
-xrun_tests_single.sh
 ```
 
 ### ***Arcanist***
