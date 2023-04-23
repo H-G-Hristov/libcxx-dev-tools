@@ -2,11 +2,7 @@
 
 ################################################################################
 
-build_path="."
-
-################################################################################
-
-execution_dir=".."
+build_dirpath="" # e.g. '.'
 
 ################################################################################
 # Generator
@@ -14,13 +10,8 @@ execution_dir=".."
 
 check_settings()
 {
-  if [ -z "${build_path}" ]; then
+  if [ -z "${build_dirpath}" ]; then
     echo "Error: 'build_path' is invalid..." >&2
-    exit 1
-  fi
-
-  if [ -z "${execution_dir}" ]; then
-    echo "Error: 'execution_dir' is invalid..." >&2
     exit 1
   fi
 }
@@ -29,8 +20,10 @@ check_settings()
 
 main()
 (
+  check_settings
+
   # Run
-  ninja -C "${build_path}" libcxx-generate-files
+  ninja -C "${build_dirpath}" libcxx-generate-files
 )
 
 ################################################################################

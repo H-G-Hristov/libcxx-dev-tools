@@ -6,16 +6,23 @@ revision_number="" # [libc++] <patch title>
 
 ################################################################################
 
-main_source_branch="main"
+output_dirpath="" # e.g. '.'
+temp_patch_directory="${output_dirpath}/" # Target temporary directory
 
-temp_patch_directory="." # Target temporary directory
+################################################################################
+
+main_source_branch="main"
 
 ################################################################################
 # Examples
 ################################################################################
 
+# WARNING: Applying patches requires a patch for 'archanist', see:
+# https://www.llvm.org/docs/Phabricator.html#requesting-a-review-via-the-command-line
+
 # Export the local changeset to a file in 'git diff' format:
 # arc export --git --revision D132265 > D132265.patch
+
 # Apply the changes in a patchfile to the working copy:
 # arc patch --patch D132265.patch
 
@@ -35,7 +42,12 @@ check_settings()
     exit 1
   fi
 
-    if [ -z "${temp_patch_directory}" ]; then
+  if [ -z "${output_dirpath}" ]; then
+    echo "Error: 'output_dirpath' is invalid..." >&2
+    exit 1
+  fi
+
+  if [ -z "${temp_patch_directory}" ]; then
     echo "Error: 'temp_patch_directory' is invalid..." >&2
     exit 1
   fi
@@ -49,8 +61,6 @@ check_main_branch()
   readonly GIT_BRANCH
 
   if [ "$GIT_BRANCH" = "${main_source_branch}" ]; then
-    # echo "Error: Patch cannot be applied on the current branch: '${GIT_BRANCH}'..."
-    # echo "       Please, switch to branch: '${main_source_branch}' and try again"
     echo "Error: Patch cannot be applied on the current branch: '${main_source_branch}'..."
     echo "       Please create a new branch and try again!"
     exit 1;

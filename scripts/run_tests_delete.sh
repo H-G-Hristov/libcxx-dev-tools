@@ -2,12 +2,10 @@
 
 ################################################################################
 
-target_directory="./zsh_out_tests"
+output_dirpath="" # e.g. '.'
+target_directory="${output_dirpath}/" # Target directory for tests results
+
 file_pattern="*.log" # Test log files pattern
-
-################################################################################
-
-execution_dir=".."
 
 ################################################################################
 # Delete test files files

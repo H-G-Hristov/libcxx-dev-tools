@@ -2,8 +2,6 @@
 
 ################################################################################
 
-build_path=""
-
 all_tests="
 check-cxx
 check-cxxabi
@@ -12,12 +10,11 @@ check-unwind
 
 ################################################################################
 
-output_dir="."
-output_file="${output_dir}/all_tests.log"
+build_dirpath="" # e.g. '.'
+build_path="${build_dirpath}/"
 
-################################################################################
-
-execution_dir=".."
+output_dirpath="" # e.g. '.'
+output_file="${output_dirpath}/all_tests.log"
 
 ################################################################################
 # Examples
@@ -32,9 +29,9 @@ execution_dir=".."
 
 check_output_dir()
 {
-  if ! [ -d "${output_dir}" ]; then
-    mkdir -p "${output_dir}" || {
-      echo "Error: Failed to create '${output_dir}"
+  if ! [ -d "${output_dirpath}" ]; then
+    mkdir -p "${output_dirpath}" || {
+      echo "Error: Failed to create '${output_dirpath}"
       exit 1
     }
   fi
@@ -42,8 +39,8 @@ check_output_dir()
 
 check_settings()
 {
-  if [ -z "${build_path}" ]; then
-    echo "Error: 'build_path' is invalid..." >&2
+  if [ -z "${build_dirpath}" ]; then
+    echo "Error: 'build_dirpath' is invalid..." >&2
     exit 1
   fi
 
@@ -54,11 +51,6 @@ check_settings()
 
   if [ -z "${output_file}" ]; then
     echo "Error: 'output_file' is invalid..." >&2
-    exit 1
-  fi
-
-  if [ -z "${execution_dir}" ]; then
-    echo "Error: 'execution_dir' is invalid..." >&2
     exit 1
   fi
 }

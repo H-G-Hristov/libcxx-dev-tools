@@ -5,10 +5,6 @@
 main_source_branch="main"
 
 ################################################################################
-
-execution_dir=".."
-
-################################################################################
 # Examples
 ################################################################################
 
@@ -23,11 +19,6 @@ check_settings()
 {
   if [ -z "${main_source_branch}" ]; then
     echo "Error: 'main_source_branch' is invalid..."
-    exit 1
-  fi
-
-  if [ -z "${execution_dir}" ]; then
-    echo "Error: 'execution_dir' is invalid..."
     exit 1
   fi
 }

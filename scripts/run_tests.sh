@@ -18,15 +18,13 @@ c++20
 ${cxx_standard_latest}
 "
 
-build_path="."
-test_tool_path="${build_path}/bin"
-
-output_dir="."
-output_file_prefix="${output_dir}/"
-
 ################################################################################
 
-execution_dir=".."
+build_dirpath="" # e.g. '.'
+test_tool_path="${build_dirpath}/bin"
+
+output_dirpath="" # e.g. '.'
+output_file_prefix="${output_dirpath}/"
 
 ################################################################################
 # Examples
@@ -50,8 +48,8 @@ execution_dir=".."
 
 check_output_dir()
 {
-  if ! [ -d "${output_dir}" ]; then
-    mkdir -p "${output_dir}" || {
+  if ! [ -d "${output_dirpath}" ]; then
+    mkdir -p "${output_dirpath}" || {
       echo "Error: Failed to create '${output_dir}"
       exit 1
     }
@@ -70,8 +68,8 @@ check_settings()
     exit 1
   fi
 
-  if [ -z "${build_path}" ]; then
-    echo "Error: 'build_path' is invalid..."
+  if [ -z "${build_dirpath}" ]; then
+    echo "Error: 'build_dirpath' is invalid..."
     exit 1
   fi
 
@@ -87,11 +85,6 @@ check_settings()
 
   if [ -z "${output_file_prefix}" ]; then
     echo "Error: 'output_file_prefix' is invalid..."
-    exit 1
-  fi
-
-  if [ -z "${execution_dir}" ]; then
-    echo "Error: 'execution_dir' is invalid..."
     exit 1
   fi
 }

@@ -2,12 +2,10 @@
 
 ################################################################################
 
-main_branch="main"
+output_dirpath="" # e.g. '.'
+diff_file_prefix="${output_dirpath}/"
 
 ################################################################################
-
-output_dir="."
-diff_file_prefix="${output_dir}/"
 
 current_branch=$(git symbolic-ref --short HEAD)
 output_file_base=$(echo "${current_branch}" | sed "s/\//-/g")
@@ -15,7 +13,7 @@ output_file="${diff_file_prefix}${output_file_base}.patch"
 
 ################################################################################
 
-execution_dir=".."
+main_source_branch="main"
 
 ################################################################################
 # `HEAD`` - current branch
@@ -53,9 +51,9 @@ execution_dir=".."
 
 check_output_dir()
 {
-  if ! [ -d "${output_dir}" ]; then
-    mkdir -p "${output_dir}" || {
-      echo "Error: Failed to create '${output_dir}"
+  if ! [ -d "${output_dirpath}" ]; then
+    mkdir -p "${output_dirpath}" || {
+      echo "Error: Failed to create '${output_dirpath}"
       exit 1
     }
   fi
@@ -63,8 +61,8 @@ check_output_dir()
 
 check_settings()
 {
-  if [ -z "${main_branch}" ]; then
-    echo "Error: 'main_branch' is invalid..." >&2
+  if [ -z "${main_source_branch}" ]; then
+    echo "Error: 'main_source_branch' is invalid..." >&2
     exit 1
   fi
 
@@ -85,11 +83,6 @@ check_settings()
 
   if [ -z "${output_file}" ]; then
     echo "Error: 'output_file' is invalid..." >&2
-    exit 1
-  fi
-
-  if [ -z "${execution_dir}" ]; then
-    echo "Error: 'execution_dir' is invalid..." >&2
     exit 1
   fi
 }
@@ -133,7 +126,7 @@ main()
   rotate_diffs "${output_file}"
 
   # Get a diff between the main branch and the current branch
-  git diff "${main_branch}"...HEAD > "${output_file}"
+  git diff "${main_source_branch}"...HEAD > "${output_file}"
 )
 
 ################################################################################

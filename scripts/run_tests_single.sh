@@ -6,20 +6,14 @@ test_suite=""
 
 ################################################################################
 
-build_path="./"
-test_tool_path="${build_path}/bin"
+build_dirpath="" # e.g. '.'
+test_tool_path="${build_dirpath}/bin"
 
-################################################################################
-
-output_dir="."
-output_file_prefix="${output_dir}/"
+output_dirpath="" # e.g. '.'
+output_file_prefix="${output_dirpath}/"
 
 output_file="${output_file_prefix}$(basename "${test_suite}").log"
 output_file="${output_file_prefix}$(echo "${test_suite}" | sed -r 's/[\/]+/-/g').log"
-
-################################################################################
-
-execution_dir=".."
 
 ################################################################################
 # Examples
@@ -80,11 +74,6 @@ check_settings()
 
   if [ -z "${output_file}" ]; then
     echo "Error: 'output_file' is invalid..."
-    exit 1
-  fi
-
-  if [ -z "${execution_dir}" ]; then
-    echo "Error: 'execution_dir' is invalid..."
     exit 1
   fi
 }
