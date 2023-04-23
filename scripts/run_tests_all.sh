@@ -10,10 +10,10 @@ check-unwind
 
 ################################################################################
 
-build_dirpath="" # e.g. '.'
+build_dirpath="" # e.g. `.`
 build_path="${build_dirpath}/"
 
-output_dirpath="" # e.g. '.'
+output_dirpath="" # e.g. `.`
 output_file="${output_dirpath}/all_tests.log"
 
 ################################################################################
@@ -62,7 +62,7 @@ main()
   check_settings
   check_output_dir
 
-  # Run all tests (dump stderr and stdout streams and write them to a file and to the console)
+  # Run all tests (dump `stderr`` and `stdout`` streams and write them to a file and to the console)
   ninja -C "${build_path}" "${all_tests}" 2>&1 | tee "${output_file}"
 )
 

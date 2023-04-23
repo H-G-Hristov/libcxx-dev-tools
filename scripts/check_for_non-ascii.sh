@@ -11,7 +11,7 @@ main()
   unset LC_COLLATE
 
   # Reject patches that introduce non-ASCII characters or hard tabs.
-  # Depends on LC_COLLATE set at the top of this script.
+  # Depends on `LC_COLLATE` set at the top of this script.
   grep -rn '[^ -~]' libcxx/include libcxx/src libcxx/test libcxx/benchmarks \
         --exclude '*.dat' \
         --exclude 'escaped_output.*.pass.cpp' \

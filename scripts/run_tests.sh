@@ -20,10 +20,10 @@ ${cxx_standard_latest}
 
 ################################################################################
 
-build_dirpath="" # e.g. '.'
+build_dirpath="" # e.g. `.`
 test_tool_path="${build_dirpath}/bin"
 
-output_dirpath="" # e.g. '.'
+output_dirpath="" # e.g. `.`
 output_file_prefix="${output_dirpath}/"
 
 ################################################################################
@@ -108,7 +108,7 @@ run_test() # test, cxx_standard, output_filename
   # Print commands while executing
   set -x
 
-  # Run a test suite (dump stderr and stdout streams and write them to a file and to the console)
+  # Run a test suite (dump `stderr` and `stdout` streams and write them to a file and to the console)
   "${test_tool_path}/llvm-lit" --param "${cxx_standard_param}" -sv "${test}" 2>&1 \
   | tee "${output_filename}${cxx_standard_file_suffix}.log"
 
@@ -139,7 +139,7 @@ main()
     fi
   done
 
-  # Do it again in case ${test} was empty
+  # Do it again in case `${test}` was empty
   { set +x; } 2>/dev/null; unset IFS
 )
 

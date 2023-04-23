@@ -6,10 +6,10 @@ test_suite=""
 
 ################################################################################
 
-build_dirpath="" # e.g. '.'
+build_dirpath="" # e.g. `.`
 test_tool_path="${build_dirpath}/bin"
 
-output_dirpath="" # e.g. '.'
+output_dirpath="" # e.g. `.`
 output_file_prefix="${output_dirpath}/"
 
 output_file="${output_file_prefix}$(basename "${test_suite}").log"
@@ -85,7 +85,7 @@ main()
   check_settings
   check_output_dir
 
-  # Run a test suite (dump stderr and stdout streams and write them to a file and to the console)
+  # Run a test suite (dump `stderr`` and `stdout`` streams and write them to a file and to the console)
   "${test_tool_path}/llvm-lit" -sv "${test_suite}" 2>&1 \
   | tee "${output_file}"
 )

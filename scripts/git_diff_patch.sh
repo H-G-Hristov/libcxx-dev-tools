@@ -2,7 +2,7 @@
 
 ################################################################################
 
-output_dirpath="" # e.g. '.'
+output_dirpath="" # e.g. `.`
 diff_file_prefix="${output_dirpath}/"
 
 ################################################################################
@@ -89,30 +89,42 @@ check_settings()
 
 ################################################################################
 
-rotate_diffs() # filename
+rotate_diffs() # filename, output_dirpath
 {
-  filename=$(basename "$1" ".patch")
+  FILENAME=$(basename "$1" ".patch")
+  readonly FILENAME
+  readonly OUT_DIRPATH="$2"
 
   # Get a list of all of the already rotated files in reverse
   # '${filename}.3.patch' '${filename}.2.patch' '${filename}.1.patch'
-  for file in $(ls -1r "${filename}."*".patch" 2> /dev/null); do
+  PATCH_FILES=$(find "${OUT_DIRPATH}" -type f -iname "${FILENAME}.*.patch" | sort -r)
+  readonly PATCH_FILES
+
+  for file in ${PATCH_FILES}; do
+    # Restore globbing and field splitting at all whitespace
+    { set +x; } 2>/dev/null; unset IFS
+    base_filename=$(basename "${file}")
+
     # Calculate the next number for the current file, i.e. '4' for '${filename}.3.patch'
-    old_index=$(echo "${file}" | sed -nE "s/^${filename}\.([0-9]*)\.patch$/\1/p")
+    old_index=$(echo "${base_filename}" | sed -nE "s/^${FILENAME}\.([0-9]*)\.patch$/\1/p")
     new_index=$((old_index + 1))
+
     # If the new file number is greater than max, delete it.
     if [ "${new_index}" -gt "${max:-999999}" ]; then
       rm -rf "${file}"
     else
-      name=$(basename "${file}" ".${old_index}.patch")
-
+      base_filename=$(basename "${base_filename}" ".${old_index}.patch")
       # Otherwise move the file to the new number.
-      mv "${file}" "${name}.${new_index}.patch"
+      mv "${file}" "${OUT_DIRPATH}/${base_filename}.${new_index}.patch"
     fi
   done
 
-  # If there is a '${filename}' file with no extension move that now.
-  if [ -e "${filename}.patch" ]; then
-    mv "${filename}.patch" "${filename}.0.patch"
+  # Do it again in case `${file}` was empty
+  { set +x; } 2>/dev/null; unset IFS
+
+  # If there is a `${FILENAME}` file with no extension move that now.
+  if [ -e "${OUT_DIRPATH}/${FILENAME}.patch" ]; then
+    mv "${OUT_DIRPATH}/${FILENAME}.patch" "${OUT_DIRPATH}/${FILENAME}.0.patch"
   fi
 }
 
@@ -123,9 +135,9 @@ main()
   check_settings
   check_output_dir
 
-  rotate_diffs "${output_file}"
+  rotate_diffs "${output_file}" "${output_dirpath}"
 
-  # Get a diff between the main branch and the current branch
+  # Get a diff between the 'main' branch and the current branch
   git diff "${main_source_branch}"...HEAD > "${output_file}"
 )
 

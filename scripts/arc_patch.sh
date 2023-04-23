@@ -6,7 +6,7 @@ revision_number="" # [libc++] <patch title>
 
 ################################################################################
 
-output_dirpath="" # e.g. '.'
+output_dirpath="" # e.g. `.`
 temp_patch_directory="${output_dirpath}/" # Target temporary directory
 
 ################################################################################
