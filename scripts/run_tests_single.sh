@@ -85,7 +85,8 @@ main()
   check_settings
   check_output_dir
 
-  # Run a test suite (dump `stderr`` and `stdout`` streams and write them to a file and to the console)
+  # Run a test suite (dump `stderr` and `stdout` streams and write them to a file and to the
+  # console)
   "${test_tool_path}/llvm-lit" -sv "${test_suite}" 2>&1 \
   | tee "${output_file}"
 )

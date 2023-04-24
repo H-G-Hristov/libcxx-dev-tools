@@ -108,7 +108,8 @@ run_test() # test, cxx_standard, output_filename
   # Print commands while executing
   set -x
 
-  # Run a test suite (dump `stderr` and `stdout` streams and write them to a file and to the console)
+  # Run a test suite (dump `stderr` and `stdout` streams and write them to a file and to the
+  # console)
   "${test_tool_path}/llvm-lit" --param "${cxx_standard_param}" -sv "${test}" 2>&1 \
   | tee "${output_filename}${cxx_standard_file_suffix}.log"
 
