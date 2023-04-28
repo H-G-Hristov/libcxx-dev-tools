@@ -17,11 +17,6 @@ check_settings()
     echo "Error: 'file_pattern' is invalid..." >&2
     exit 1
   fi
-
-  if [ -z "${execution_dir}" ]; then
-    echo "Error: 'execution_dir' is invalid..." >&2
-    exit 1
-  fi
 }
 
 ################################################################################

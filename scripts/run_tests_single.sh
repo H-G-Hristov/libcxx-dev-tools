@@ -37,9 +37,9 @@ output_file="${output_file_prefix}$(echo "${test_suite}" | sed -r 's/[\/]+/-/g')
 
 check_output_dir()
 {
-  if ! [ -d "${output_dir}" ]; then
-    mkdir -p "${output_dir}" || {
-      echo "Error: Failed to create '${output_dir}"
+  if ! [ -d "${output_dirpath}" ]; then
+    mkdir -p "${output_dirpath}" || {
+      echo "Error: Failed to create '${output_dirpath}"
       exit 1
     }
   fi
@@ -62,7 +62,7 @@ check_settings()
     exit 1
   fi
 
-  if [ -z "${output_dir}" ]; then
+  if [ -z "${output_dirpath}" ]; then
     echo "Error: 'output_dir' is invalid..."
     exit 1
   fi
