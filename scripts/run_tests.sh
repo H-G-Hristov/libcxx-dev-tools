@@ -78,7 +78,7 @@ check_settings()
     exit 1
   fi
 
-  if [ -z "${output_dir}" ]; then
+  if [ -z "${output_dirpath}" ]; then
     echo "Error: 'output_dir' is invalid..."
     exit 1
   fi
