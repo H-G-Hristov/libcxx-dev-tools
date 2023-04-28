@@ -8,7 +8,8 @@ main_source_branch="main"
 # Examples
 ################################################################################
 
-# Create a draft revision against branch `main` with the commits from the current branch.
+# Create a draft revision against branch `main` with the commits from the
+# current branch.
 # arc diff main --draft
 
 ################################################################################

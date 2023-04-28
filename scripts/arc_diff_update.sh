@@ -12,7 +12,8 @@ main_source_branch="main"
 # Examples
 ################################################################################
 
-# Update a specific revision against branch `main` with the commits from the current branch.
+# Update a specific revision against branch `main` with the commits from the
+# current branch.
 # arc diff main --update D144822
 
 ################################################################################

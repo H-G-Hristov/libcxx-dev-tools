@@ -62,8 +62,10 @@ main()
   check_settings
   check_output_dir
 
-  # Run all tests (dump `stderr`` and `stdout`` streams and write them to a file and to the console)
-  ninja -C "${build_path}" "${all_tests}" 2>&1 | tee "${output_file}"
+  # Run all tests (dump `stderr` and `stdout` streams and write them to a file
+  # and to the console).
+  # shellcheck disable=SC2086
+  ninja -C "${build_path}" ${all_tests} 2>&1 | tee "${output_file}"
 )
 
 ################################################################################
