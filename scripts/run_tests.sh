@@ -50,7 +50,7 @@ check_output_dir()
 {
   if ! [ -d "${output_dirpath}" ]; then
     mkdir -p "${output_dirpath}" || {
-      echo "Error: Failed to create '${output_dir}"
+      echo "Error: Failed to create '${output_dirpath}"
       exit 1
     }
   fi
