@@ -16,7 +16,7 @@ output_file="${diff_file_prefix}${output_file_base}.patch"
 main_source_branch="main"
 
 ################################################################################
-# `HEAD`` - current branch
+# `HEAD` - current branch
 ################################################################################
 #
 # G   H   I   J
