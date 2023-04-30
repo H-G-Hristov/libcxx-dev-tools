@@ -41,10 +41,6 @@ main_source_branch="main"
 # Format the changes in the last commit:
 # git clang-format HEAD^
 
-# Format all changes between the `<main_branch>` branch and the last commit in
-# the current branch:
-# git clang-format <main_branch>...HEAD
-
 ################################################################################
 # Run `clang-format` tool
 ################################################################################
@@ -65,7 +61,7 @@ check_main_branch()
   readonly GIT_BRANCH
 
   if [ "$GIT_BRANCH" = "${main_source_branch}" ]; then
-    echo "Error: Patch cannot be applied on the current branch: '${main_source_branch}'..."
+    echo "Error: Format cannot be applied on the current branch: '${main_source_branch}'..."
     echo "       Please create a new branch and try again!"
     exit 1;
   fi
@@ -78,7 +74,7 @@ main()
   check_settings
   check_main_branch
 
-  git clang-format "${main_source_branch}"...HEAD
+  git clang-format HEAD^
 )
 
 ###############################################################################
