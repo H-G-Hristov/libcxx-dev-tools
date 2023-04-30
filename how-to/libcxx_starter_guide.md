@@ -120,7 +120,7 @@
 
 ### ***Arcanist***
 
-### General Workflow
+#### General Workflow
 
 1. Select a repository: `cd <repository_path>`
 2. Checkout a branch with changes: `git checkout <branch_name>`
@@ -140,3 +140,26 @@ arc land
 ```
 
 WARNING: Rebase against **`main`** before updating the diff with ***Arcanist***. Don't rebase manually before landing.
+
+### Formatting Code
+
+#### Using ***git***
+
+To format the changes in the last commit:
+
+```sh
+git clang-format HEAD^
+```
+
+To format all changes between the `<main_branch>` branch and the last commit in the current branch:
+
+```sh
+git clang-format <main_branch>...HEAD
+```
+
+#### Using ***Visual Studio Code***
+
+Visual studio code provides the following code formatting menu items:
+
+- `Format Document`
+- `Format Selection`
