@@ -6,8 +6,6 @@
 
 main()
 (
-  check_settings
-
   find . -name ".DS_Store" -type f -delete
 )
 

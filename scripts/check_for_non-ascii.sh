@@ -6,8 +6,6 @@
 
 main()
 (
-  check_settings
-
   unset LC_COLLATE
 
   # Reject patches that introduce non-ASCII characters or hard tabs.
