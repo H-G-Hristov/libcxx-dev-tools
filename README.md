@@ -6,7 +6,7 @@ How-To's and helper ***shell scripts*** for ***`libc++`*** development.
 
 - How-Tos
   - [How-To Setup ***GitHub*** with ***SSH***](how-to/github_ssh_setup.md)
-  - [How-To Contribute to ***`libc++`*** Starter Guide](how-to/libcxx_starter_guide.md)
+  - [How-To Contribute to ***`libc++`*** - Starter Guide](how-to/libcxx_starter_guide.md)
 - [References](notes/references.md)
 - [Scripts](scripts)
 
