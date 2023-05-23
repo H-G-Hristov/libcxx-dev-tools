@@ -7,7 +7,7 @@ test_suite="
 
 ################################################################################
 
-cxx_standard_latest="c++2b"
+cxx_standard_latest="c++23"
 
 cxx_standards="
 c++03
