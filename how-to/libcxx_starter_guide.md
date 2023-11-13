@@ -67,6 +67,68 @@
 }
 ```
 
+- ***CMake** presets
+
+> `./runtimes/CMakeUserPresets.json`
+
+```json
+{
+  "version": 6,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 26,
+    "patch": 3
+  },
+  "configurePresets": [
+    {
+      "name": "default",
+      "displayName": "Default Config",
+      "description": "Default build using Ninja generator",
+      "hidden": true,
+      "generator": "Ninja",
+      "binaryDir": "${sourceParentDir}/build/${presetName}"
+    },
+    {
+      "name": "default.debug.libcxx",
+      "displayName": "Debug libc++",
+      "description": "libc++ debug configuration",
+      "inherits": [
+        "default"
+      ],
+      "cacheVariables": {
+        "LLVM_ENABLE_RUNTIMES": {
+          "type": "STRING",
+          "value": "libcxx;libcxxabi;libunwind"
+        },
+        "CMAKE_EXPORT_COMPILE_COMMANDS": {
+          "type": "BOOL",
+          "value": "ON"
+        },
+        "CMAKE_BUILD_TYPE": {
+          "type": "STRING",
+          "value": "Debug"
+        },
+        "LIBCXX_ENABLE_DEBUG_MODE": {
+          "type": "BOOL",
+          "value": "ON"
+        },
+        "LIBCXX_HARDENING_MODE": {
+          "type": "STRING",
+          "value": "debug"
+        }
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "default",
+      "configurePreset": "default.debug.libcxx"
+    }
+  ]
+}
+
+```
+
 - ***cppdbg*** settings
 
 > `./.vscode/launch.json`
@@ -101,6 +163,7 @@
     },
   ]
 }
+
 ```
 
 - ***CodeLLDB*** settings
