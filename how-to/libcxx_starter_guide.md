@@ -11,10 +11,6 @@
       - [Building libc++](https://libcxx.llvm.org/BuildingLibcxx.html)
       - [Testing libc++](https://libcxx.llvm.org/TestingLibcxx.html)
       - [Contributing to libc++](https://libcxx.llvm.org/Contributing.html)
-    - [Code Reviews with Phabricator](https://www.llvm.org/docs/Phabricator.html)
-      - [Arcanist User Guide](https://secure.phabricator.com/book/phabricator/article/arcanist/)
-        - [Arcanist Quick Start](https://secure.phabricator.com/book/phabricator/article/arcanist_quick_start/)
-        - [`arc diff`](https://secure.phabricator.com/book/phabricator/article/arcanist_diff/)
 2. Further reading:
     - C++ Standard
       - [ISO C++ Standard Draft (html)](https://eel.is/c++draft/)
@@ -73,11 +69,11 @@
 
 ```json
 {
-  "version": 6,
+  "version": 9,
   "cmakeMinimumRequired": {
     "major": 3,
-    "minor": 26,
-    "patch": 3
+    "minor": 30,
+    "patch": 0
   },
   "configurePresets": [
     {
@@ -211,7 +207,8 @@
 # *~
 
 # Directories
-**/z_libcxx_*/
+**/libcxx-*/
+**/z_libcxx-*/
 **/z_test_bed/
 **/zsh*/
 
@@ -219,29 +216,6 @@
 .editorconfig
 
 ```
-
-### ***Arcanist***
-
-#### General Workflow
-
-1. Select a repository: `cd <repository_path>`
-2. Checkout a branch with changes: `git checkout <branch_name>`
-3. Create a draft: `arc diff <main_branch> --draft`
-4. Pull **`main`** and rebase.
-5. Update the patch: `arc diff <main_branch> --update <revision_number>`
-6. Land the patch: `arc land`
-
-#### Landing a patch
-
-The simplest way to ***land*** a patch is to use `arc land`. In case of an error retry as many times as necessarily:
-
-```sh
-cd <cloned repository>
-git checkout <branch>
-arc land
-```
-
-WARNING: Rebase against **`main`** before updating the diff with ***Arcanist***. Don't rebase manually before landing.
 
 ### Formatting Code
 
@@ -274,11 +248,11 @@ Visual studio code provides the following code formatting menu items:
 
 ```json5
 {
-  "version": 6,
+  "version": 9,
   "cmakeMinimumRequired": {
     "major": 3,
-    "minor": 26,
-    "patch": 3
+    "minor": 30,
+    "patch": 0
   },
   "configurePresets": [
     {
@@ -316,11 +290,11 @@ Visual studio code provides the following code formatting menu items:
 
 ```json5
 {
-  "version": 6,
+  "version": 9,
   "cmakeMinimumRequired": {
     "major": 3,
-    "minor": 26,
-    "patch": 3
+    "minor": 30,
+    "patch": 0
   },
   "configurePresets": [],
   "buildPresets": []
@@ -331,7 +305,7 @@ Visual studio code provides the following code formatting menu items:
 > `./z_test_bed/CMakeLists.txt`
 
 ```json5
-cmake_minimum_required(VERSION 2.26.3)
+cmake_minimum_required(VERSION 3.30.0)
 
 project("LLVM-Testing")
 
@@ -384,7 +358,7 @@ target_include_directories(${PROJECT_NAME}
 set_target_properties(${PROJECT_NAME}
   PROPERTIES
     CXX_EXTENSIONS OFF
-    CXX_STANDARD 23
+    CXX_STANDARD 26
     CXX_STANDARD_REQUIRED ON
 )
 
