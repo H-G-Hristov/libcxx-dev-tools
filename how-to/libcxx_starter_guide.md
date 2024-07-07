@@ -31,6 +31,16 @@
 
 ### ***Visual Studio Code***
 
+- Settings
+
+> `./.vscode/settings.json`
+
+```json5
+{
+    "cmake.sourceDirectory": "${workspaceFolder}/runtimes",
+}
+```
+
 - Extensions
 
 > `./.vscode/extension.json`
