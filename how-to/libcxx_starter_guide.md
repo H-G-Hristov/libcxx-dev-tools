@@ -41,6 +41,28 @@
 }
 ```
 
+- Tasks
+
+> `./.vscode/tasks.json`
+
+```json5
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "cmake",
+      "label": "CMake: install",
+      "command": "install",
+      "preset": "${command:cmake.activeBuildPresetName}",
+      "problemMatcher": [],
+      "detail": "libc++ install task"
+    }
+  ]
+}
+
+```
+
+
 - Extensions
 
 > `./.vscode/extension.json`
@@ -92,12 +114,14 @@
       "description": "Default build using Ninja generator",
       "hidden": true,
       "generator": "Ninja",
-      "binaryDir": "${sourceParentDir}/build/${presetName}"
+      "binaryDir": "${sourceParentDir}/build/${presetName}",
+      "installDir": "${sourceParentDir}/build/${presetName}/libcxx/test-suite-install"
     },
     {
       "name": "default.debug.libcxx",
       "displayName": "Debug libc++",
       "description": "libc++ debug configuration",
+      "hidden": true,
       "inherits": [
         "default"
       ],
@@ -121,6 +145,82 @@
         "LIBCXX_HARDENING_MODE": {
           "type": "STRING",
           "value": "debug"
+        }
+      }
+    },
+    {
+      "name": "default.debug.libcxx.clang",
+      "displayName": "Debug libc++ (Default Clang)",
+      "description": "libc++ debug configuration",
+      "inherits": [
+        "default.debug.libcxx"
+      ],
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": {
+          "type": "STRING",
+          "value": "clang"
+        },
+        "CMAKE_CXX_COMPILER": {
+          "type": "STRING",
+          "value": "clang++"
+        }
+      }
+    },
+    {
+      "name": "default.debug.libcxx.clang-18",
+      "displayName": "Debug libc++ (Clang 18)",
+      "description": "libc++ debug configuration",
+      "inherits": [
+        "default.debug.libcxx"
+      ],
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": {
+          "type": "STRING",
+          "value": "clang-18"
+        },
+        "CMAKE_CXX_COMPILER": {
+          "type": "STRING",
+          "value": "clang++-18"
+        }
+      }
+    },
+    {
+      "name": "default.debug.libcxx.clang-20",
+      "displayName": "Debug libc++ (Clang 20)",
+      "description": "libc++ debug configuration",
+      "inherits": [
+        "default.debug.libcxx"
+      ],
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": {
+          "type": "STRING",
+          "value": "clang-20"
+        },
+        "CMAKE_CXX_COMPILER": {
+          "type": "STRING",
+          "value": "clang++-20"
+        },
+        "CMAKE_CXX_FLAGS": {
+          "type": "STRING",
+          "value": "-stdlib=libc++"
+        }
+      }
+    },
+    {
+      "name": "default.debug.libcxx.gcc14",
+      "displayName": "Debug libc++ (GCC14)",
+      "description": "libc++ debug configuration",
+      "inherits": [
+        "default.debug.libcxx"
+      ],
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": {
+          "type": "STRING",
+          "value": "gcc-14"
+        },
+        "CMAKE_CXX_COMPILER": {
+          "type": "STRING",
+          "value": "g++-14"
         }
       }
     }
