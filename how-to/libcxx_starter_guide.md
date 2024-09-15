@@ -51,12 +51,60 @@
   "tasks": [
     {
       "type": "cmake",
+      "label": "CMake: configure",
+      "command": "configure",
+      "preset": "${command:cmake.activeConfigurePresetName}",
+      "problemMatcher": [],
+      "detail": "[libc++] CMake template configure task",
+      "hide": true
+    },
+    {
+      "type": "cmake",
+      "label": "CMake: build",
+      "command": "build",
+      "targets": [
+        "all"
+      ],
+      "preset": "${command:cmake.activeBuildPresetName}",
+      "group": "build",
+      "problemMatcher": [],
+      "detail": "[libc++] CMake template build task",
+      "hide": true
+    },
+    {
+      "type": "cmake",
+      "label": "CMake: clean rebuild",
+      "command": "cleanRebuild",
+      "targets": [
+        "all"
+      ],
+      "preset": "${command:cmake.activeBuildPresetName}",
+      "group": "build",
+      "problemMatcher": [],
+      "detail": "[libc++] CMake template clean rebuild task",
+      "hide": true
+    },
+    {
+      "type": "cmake",
       "label": "CMake: install",
       "command": "install",
       "preset": "${command:cmake.activeBuildPresetName}",
       "problemMatcher": [],
-      "detail": "libc++ install task"
-    }
+      "detail": "[libc++] CMake template install task",
+      "hide": true
+    },
+    {
+      "label": "CMake: Build and Install",
+      "dependsOrder": "sequence",
+      "dependsOn": ["CMake: configure", "CMake: build", "CMake: install"],
+      "detail": "[libc++] CMake Build and Install task"
+    },
+    {
+      "label": "CMake: Rebuild and Install",
+      "dependsOrder": "sequence",
+      "dependsOn": ["CMake: configure", "CMake: clean rebuild", "CMake: install"],
+      "detail": "[libc++] CMake Rebuild and Install task"
+    },
   ]
 }
 
