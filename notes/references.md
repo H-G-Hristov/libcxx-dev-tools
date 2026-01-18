@@ -1,7 +1,7 @@
 # References
 
 - ***Working Draft, Standard for Programming Language C++***
-  - <https://eel.is/c++draft/>
+  - <https://wg21.link/draft>
 
 - The meaning of "exposition only" in the ***C++ Standard***
   - <https://stackoverflow.com/a/34494188>
