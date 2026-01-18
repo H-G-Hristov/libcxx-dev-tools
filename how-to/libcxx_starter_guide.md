@@ -151,8 +151,8 @@
 {
   "version": 9,
   "cmakeMinimumRequired": {
-    "major": 3,
-    "minor": 30,
+    "major": 4,
+    "minor": 2,
     "patch": 0
   },
   "configurePresets": [
@@ -186,10 +186,6 @@
           "type": "STRING",
           "value": "Debug"
         },
-        "LIBCXX_ENABLE_DEBUG_MODE": {
-          "type": "BOOL",
-          "value": "ON"
-        },
         "LIBCXX_HARDENING_MODE": {
           "type": "STRING",
           "value": "debug"
@@ -215,8 +211,8 @@
       }
     },
     {
-      "name": "default.debug.libcxx.clang-18",
-      "displayName": "Debug libc++ (Clang 18)",
+      "name": "default.debug.libcxx.clang-21",
+      "displayName": "Debug libc++ (Clang 21)",
       "description": "libc++ debug configuration",
       "inherits": [
         "default.debug.libcxx"
@@ -224,29 +220,11 @@
       "cacheVariables": {
         "CMAKE_C_COMPILER": {
           "type": "STRING",
-          "value": "clang-18"
+          "value": "clang-21"
         },
         "CMAKE_CXX_COMPILER": {
           "type": "STRING",
-          "value": "clang++-18"
-        }
-      }
-    },
-    {
-      "name": "default.debug.libcxx.clang-20",
-      "displayName": "Debug libc++ (Clang 20)",
-      "description": "libc++ debug configuration",
-      "inherits": [
-        "default.debug.libcxx"
-      ],
-      "cacheVariables": {
-        "CMAKE_C_COMPILER": {
-          "type": "STRING",
-          "value": "clang-20"
-        },
-        "CMAKE_CXX_COMPILER": {
-          "type": "STRING",
-          "value": "clang++-20"
+          "value": "clang++-21"
         },
         "CMAKE_CXX_FLAGS": {
           "type": "STRING",
@@ -255,8 +233,8 @@
       }
     },
     {
-      "name": "default.debug.libcxx.gcc14",
-      "displayName": "Debug libc++ (GCC14)",
+      "name": "default.debug.libcxx.gcc15",
+      "displayName": "Debug libc++ (GCC15)",
       "description": "libc++ debug configuration",
       "inherits": [
         "default.debug.libcxx"
@@ -264,11 +242,11 @@
       "cacheVariables": {
         "CMAKE_C_COMPILER": {
           "type": "STRING",
-          "value": "gcc-14"
+          "value": "gcc-15"
         },
         "CMAKE_CXX_COMPILER": {
           "type": "STRING",
-          "value": "g++-14"
+          "value": "g++-15"
         }
       }
     }
@@ -314,6 +292,33 @@
       // Resolved by CMake Tools:
       "program": "${command:cmake.launchTargetPath}",
       "MIMode": "lldb"
+    },
+    {
+      "name": "(gdb) Launch",
+      "type": "cppdbg",
+      "request": "launch",
+      // Resolved by CMake Tools:
+      "program": "${command:cmake.launchTargetPath}",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${fileDirname}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      // Enable libc++ pretty printers
+      "miDebuggerArgs": "-ex 'source ${workspaceFolder}/libcxx/utils/gdb/libcxx/printers.py' -ex 'python register_libcxx_printer_loader()'",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        },
+        {
+          "description": "Set Disassembly Flavor to Intel",
+          "text": "-gdb-set disassembly-flavor intel",
+          "ignoreFailures": true
+        },
+      ]
     },
   ]
 }
@@ -408,8 +413,8 @@ Visual studio code provides the following code formatting menu items:
 {
   "version": 9,
   "cmakeMinimumRequired": {
-    "major": 3,
-    "minor": 30,
+    "major": 4,
+    "minor": 2,
     "patch": 0
   },
   "configurePresets": [
@@ -430,7 +435,14 @@ Visual studio code provides the following code formatting menu items:
       ],
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug",
-        "LIBCXX_ENABLE_DEBUG_MODE": "ON"
+        "CMAKE_C_COMPILER": {
+          "type": "STRING",
+          "value": "clang-21"
+        },
+        "CMAKE_CXX_COMPILER": {
+          "type": "STRING",
+          "value": "clang-21"
+        }
       }
     }
   ],
@@ -450,8 +462,8 @@ Visual studio code provides the following code formatting menu items:
 {
   "version": 9,
   "cmakeMinimumRequired": {
-    "major": 3,
-    "minor": 30,
+    "major": 4,
+    "minor": 2,
     "patch": 0
   },
   "configurePresets": [],
@@ -463,7 +475,7 @@ Visual studio code provides the following code formatting menu items:
 > `./z_test_bed/CMakeLists.txt`
 
 ```json5
-cmake_minimum_required(VERSION 3.30.0)
+cmake_minimum_required(VERSION 4.2.0)
 
 project("LLVM-Testing")
 
@@ -486,6 +498,15 @@ target_compile_definitions(${PROJECT_NAME}
 
 target_compile_options(${PROJECT_NAME}
   PRIVATE
+    # Debug flags
+    $<$<CONFIG:Debug>:-g -O0>
+    # Release with debug info
+    $<$<CONFIG:RelWithDebInfo>:-g -O2>
+    # Release (fully optimized)
+    $<$<CONFIG:Release>:-O3>
+    # Size optimization
+    $<$<CONFIG:MinSizeRel>:-Os>
+
     -nostdinc++
     -nostdlib++
     -isystem ${LIBCXX_INCLUDE_DIR}
