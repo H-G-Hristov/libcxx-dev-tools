@@ -13,7 +13,7 @@
       - [Contributing to libc++](https://libcxx.llvm.org/Contributing.html)
 2. Further reading:
     - C++ Standard
-      - [ISO C++ Standard Draft (html)](https://eel.is/c++draft/)
+      - [ISO C++ Standard Draft (html)](https://wg21.link/draft/)
       - [ISO C++ Standard Draft (n4928.pdf)](https://open-std.org/JTC1/SC22/WG21/docs/papers/2023/n4928.pdf)
       - [ISO Papers](https://open-std.org/JTC1/SC22/WG21/docs/papers/2023/)
     - Contibuting:
@@ -25,6 +25,7 @@
       - [Pre-Release](https://prereleases.llvm.org)
     - C++ Standard Library Implementations
       - [Microsoft's C++ Standard Library](https://github.com/microsoft/STL)
+      - [libstdc++](https://github.com/gcc-mirror/gcc/tree/master/libstdc++-v3)
       - [libstdc++ Source Documentation](https://gcc.gnu.org/onlinedocs/libstdc++/latest-doxygen/index.html)
 
 ## Tools
